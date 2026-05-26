@@ -4,10 +4,11 @@ import kr.ac.hansung.dto.ProductDto;
 import kr.ac.hansung.entity.Product;
 import kr.ac.hansung.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -17,8 +18,11 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     @Transactional(readOnly = true)
-    public List<Product> findAll() {
-        return productRepository.findAll();
+    public Page<Product> findAll(String keyword, Pageable pageable) {
+        if (keyword == null || keyword.isBlank()) {
+            return productRepository.findAll(pageable);
+        }
+        return productRepository.findByKeyword(keyword, pageable);
     }
 
     @Transactional(readOnly = true)
