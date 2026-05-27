@@ -35,9 +35,12 @@
                     <a class="nav-link" th:href="@{/admin/dashboard}">관리자</a>
                 </li>
             </ul>
-            <form th:action="@{/logout}" method="post" class="d-flex">
-                <button class="btn btn-outline-light btn-sm px-3">로그아웃</button>
-            </form>
+            <div class="d-flex align-items-center gap-2">
+                <a class="nav-link text-white" th:href="@{/user/password}">비밀번호 변경</a>
+                <form th:action="@{/logout}" method="post">
+                    <button class="btn btn-outline-light btn-sm px-3">로그아웃</button>
+                </form>
+            </div>
         </div>
     </div>
 </nav>
